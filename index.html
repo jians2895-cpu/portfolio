@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="コーチングサイト『Départ ～デパール～』の制作・運用実績を紹介するWeb制作ポートフォリオ。"
+    />
+    <title>Web制作ポートフォリオ｜Départ</title>
+    <style>
+      :root {
+        --ink: #172a31;
+        --muted: #53656b;
+        --teal: #0d6a70;
+        --teal-dark: #08494e;
+        --aqua: #c7e8e5;
+        --pearl: #f7fbfa;
+        --white: #ffffff;
+        --line: rgba(13, 106, 112, 0.16);
+        --shadow: 0 28px 80px rgba(10, 62, 66, 0.14);
+      }
+
+      * { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 8% 4%, rgba(151, 215, 210, 0.4), transparent 27rem),
+          linear-gradient(180deg, #f8fcfb 0%, #ffffff 42%, #f5faf9 100%);
+        font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+        font-size: 16px;
+        line-height: 1.8;
+      }
+
+      a { color: inherit; }
+
+      img { display: block; max-width: 100%; }
+
+      .wrap { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 78px;
+        gap: 24px;
+      }
+
+      .brand {
+        color: var(--teal-dark);
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .top-link {
+        color: var(--teal-dark);
+        font-size: 0.92rem;
+        font-weight: 700;
+        text-decoration: none;
+        border-bottom: 1px solid currentColor;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(430px, 1.1fr);
+        align-items: center;
+        gap: clamp(42px, 7vw, 88px);
+        min-height: calc(100vh - 78px);
+        padding: 62px 0 100px;
+      }
+
+      .eyebrow {
+        margin: 0 0 20px;
+        color: var(--teal);
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+        font-size: clamp(2.9rem, 6.3vw, 5.5rem);
+        font-weight: 600;
+        line-height: 1.05;
+        letter-spacing: -0.03em;
+      }
+
+      h1 span { display: block; margin-top: 18px; color: var(--teal); font-size: 0.41em; letter-spacing: 0.03em; }
+
+      .hero-copy {
+        max-width: 34rem;
+        margin: 30px 0 0;
+        color: var(--muted);
+        font-size: 1.06rem;
+      }
+
+      .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 52px;
+        padding: 0 24px;
+        border: 1px solid var(--teal);
+        border-radius: 999px;
+        font-weight: 800;
+        text-decoration: none;
+        transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+      }
+
+      .button:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(13, 106, 112, 0.18); }
+      .button.primary { color: var(--white); background: var(--teal); }
+      .button.secondary { color: var(--teal-dark); background: rgba(255, 255, 255, 0.7); }
+
+      .project-frame {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 5 / 4;
+        border: 10px solid rgba(255, 255, 255, 0.9);
+        border-radius: 30px;
+        background: var(--white);
+        box-shadow: var(--shadow);
+      }
+
+      .project-frame::after {
+        position: absolute;
+        inset: 0;
+        content: "";
+        background: linear-gradient(180deg, rgba(255,255,255,0) 46%, rgba(2,39,42,0.7) 100%);
+      }
+
+      .project-frame > img:first-child { width: 100%; height: 100%; object-fit: cover; }
+
+      .frame-tag {
+        position: absolute;
+        z-index: 2;
+        top: 22px;
+        left: 22px;
+        padding: 8px 13px;
+        border-radius: 999px;
+        color: var(--teal-dark);
+        background: rgba(255,255,255,0.9);
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+      }
+
+      .frame-logo {
+        position: absolute;
+        z-index: 2;
+        right: 30px;
+        bottom: 26px;
+        width: 112px;
+        height: 112px;
+        object-fit: contain;
+        filter: drop-shadow(0 9px 24px rgba(0,0,0,0.25));
+      }
+
+      .section { padding: 110px 0; }
+
+      .section-head {
+        display: grid;
+        grid-template-columns: 0.42fr 1fr;
+        gap: 48px;
+        margin-bottom: 56px;
+      }
+
+      .section-label { color: var(--teal); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; }
+
+      h2 {
+        margin: 0;
+        font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+        font-size: clamp(2rem, 4vw, 3.45rem);
+        font-weight: 600;
+        line-height: 1.35;
+      }
+
+      .overview-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 24px;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: rgba(255,255,255,0.78);
+        box-shadow: 0 12px 38px rgba(18, 67, 70, 0.06);
+      }
+
+      .summary { padding: clamp(28px, 5vw, 52px); }
+      .summary h3 { margin: 0 0 18px; font-size: 1.45rem; }
+      .summary p { margin: 0; color: var(--muted); }
+
+      .facts { display: grid; margin: 0; padding: 10px 30px; }
+      .fact { display: grid; grid-template-columns: 7.5rem 1fr; gap: 14px; padding: 21px 0; border-bottom: 1px solid var(--line); }
+      .fact:last-child { border-bottom: 0; }
+      .fact dt { color: var(--muted); font-size: 0.85rem; font-weight: 700; }
+      .fact dd { margin: 0; font-weight: 700; }
+
+      .work-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+      .work-card { min-height: 236px; padding: 30px; }
+      .number { color: var(--teal); font-size: 0.75rem; font-weight: 800; letter-spacing: 0.14em; }
+      .work-card h3 { margin: 38px 0 12px; font-size: 1.18rem; }
+      .work-card p { margin: 0; color: var(--muted); font-size: 0.94rem; }
+
+      .process {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: var(--white);
+      }
+
+      .process-item { position: relative; padding: 34px 26px; border-right: 1px solid var(--line); }
+      .process-item:last-child { border-right: 0; }
+      .process-item small { color: var(--teal); font-weight: 800; }
+      .process-item strong { display: block; margin-top: 10px; font-size: 1.02rem; }
+
+      .closing {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 36px;
+        margin: 20px 0 110px;
+        padding: clamp(34px, 6vw, 66px);
+        border-radius: 28px;
+        color: var(--white);
+        background: var(--teal-dark);
+      }
+
+      .closing h2 { max-width: 15em; }
+      .closing p { margin: 16px 0 0; color: rgba(255,255,255,0.72); }
+      .closing .button { color: var(--teal-dark); border-color: var(--white); background: var(--white); }
+
+      footer { padding: 28px 0 42px; color: var(--muted); font-size: 0.82rem; border-top: 1px solid var(--line); }
+      footer .wrap { display: flex; justify-content: space-between; gap: 20px; }
+
+      @media (max-width: 860px) {
+        .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 58px; }
+        .project-frame { max-width: 650px; }
+        .section-head, .overview-grid { grid-template-columns: 1fr; gap: 24px; }
+        .work-grid { grid-template-columns: 1fr; }
+        .process { grid-template-columns: 1fr 1fr; }
+        .process-item:nth-child(2) { border-right: 0; }
+        .process-item:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+        .closing { grid-template-columns: 1fr; }
+      }
+
+      @media (max-width: 560px) {
+        .wrap { width: min(100% - 28px, 1120px); }
+        .topbar { min-height: 66px; }
+        .top-link { font-size: 0.82rem; }
+        .hero { padding: 42px 0 72px; gap: 40px; }
+        h1 { font-size: clamp(2.6rem, 14vw, 4.1rem); }
+        h1 span { font-size: 0.37em; }
+        .hero-actions .button { width: 100%; }
+        .project-frame { aspect-ratio: 4 / 5; border-width: 7px; border-radius: 23px; }
+        .frame-logo { width: 88px; height: 88px; right: 18px; bottom: 18px; }
+        .section { padding: 78px 0; }
+        .facts { padding: 8px 22px; }
+        .fact { grid-template-columns: 1fr; gap: 3px; }
+        .process { grid-template-columns: 1fr; }
+        .process-item { border-right: 0; border-bottom: 1px solid var(--line); }
+        .process-item:nth-child(3) { border-bottom: 1px solid var(--line); }
+        .process-item:last-child { border-bottom: 0; }
+        .closing { margin-bottom: 74px; }
+        footer .wrap { display: block; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .button { transition: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="wrap topbar">
+      <div class="brand">Web Portfolio</div>
+      <a class="top-link" href="#project">制作実績を見る</a>
+    </header>
+
+    <main>
+      <section class="wrap hero" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">Web Design / Coding / Operation</p>
+          <h1 id="page-title">Départ<span>想いを整理し、伝わるWebサイトへ。</span></h1>
+          <p class="hero-copy">
+            コーチング事業の魅力と信頼感が伝わるよう、情報設計からHTML・CSSでの実装、公開、検索対応、その後の更新まで一貫して担当しました。
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="https://depart-coach.site/" target="_blank" rel="noopener noreferrer">公開サイトを見る ↗</a>
+            <a class="button secondary" href="#project">担当内容を見る</a>
+          </div>
+        </div>
+
+        <div class="project-frame" aria-label="Départサイトのイメージ">
+          <img src="assets/depart-hero.jpg" alt="パールと花を使ったDépartのメインビジュアル" />
+          <span class="frame-tag">LIVE WEBSITE</span>
+          <img class="frame-logo" src="assets/depart-logo.png" alt="Départロゴ" />
+        </div>
+      </section>
+
+      <section class="section" id="project">
+        <div class="wrap">
+          <div class="section-head">
+            <div class="section-label">01 / Project</div>
+            <h2>事業の言葉を整理し、<br />安心して相談できる入口をつくる。</h2>
+          </div>
+
+          <div class="overview-grid">
+            <article class="panel summary">
+              <h3>Départ ～デパール～</h3>
+              <p>
+                福岡を拠点に全国対応する、コーチング・キャリア相談事業のWebサイトです。クライアントの要望を確認しながら、サービス内容、実績、相談の流れ、問い合わせ先を一つのページに整理しました。制作後も文章やレイアウトの改善を継続しています。
+              </p>
+            </article>
+
+            <dl class="panel facts">
+              <div class="fact"><dt>担当</dt><dd>制作・公開・運用</dd></div>
+              <div class="fact"><dt>使用技術</dt><dd>HTML / CSS</dd></div>
+              <div class="fact"><dt>公開・管理</dt><dd>Netlify / 独自ドメイン</dd></div>
+              <div class="fact"><dt>検索対応</dt><dd>SEO / Search Console</dd></div>
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap">
+          <div class="section-head">
+            <div class="section-label">02 / Work</div>
+            <h2>担当したこと</h2>
+          </div>
+
+          <div class="work-grid">
+            <article class="panel work-card">
+              <span class="number">01</span>
+              <h3>情報設計と文章整理</h3>
+              <p>伝えたい内容をヒアリングし、利用者がサービス内容や相談方法を順番に理解できるページ構成へ整理しました。</p>
+            </article>
+            <article class="panel work-card">
+              <span class="number">02</span>
+              <h3>HTML・CSS実装</h3>
+              <p>PCとスマートフォンの両方で読みやすいレイアウトを実装。画像の見え方や文字の改行も画面幅に合わせて調整しました。</p>
+            </article>
+            <article class="panel work-card">
+              <span class="number">03</span>
+              <h3>公開後の運用</h3>
+              <p>独自ドメイン、サイトマップ、Google Search Consoleを設定。公開後も要望に応じて文章や実績欄を更新しています。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap">
+          <div class="section-head">
+            <div class="section-label">03 / Process</div>
+            <h2>制作の進め方</h2>
+          </div>
+
+          <div class="process" aria-label="制作工程">
+            <div class="process-item"><small>STEP 1</small><strong>要望の確認</strong></div>
+            <div class="process-item"><small>STEP 2</small><strong>構成・文章整理</strong></div>
+            <div class="process-item"><small>STEP 3</small><strong>実装・調整</strong></div>
+            <div class="process-item"><small>STEP 4</small><strong>公開・改善</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="wrap closing">
+        <div>
+          <h2>実際のサイトで、デザインと使いやすさをご確認ください。</h2>
+          <p>コーチングサイト「Départ ～デパール～」は現在も公開・運用中です。</p>
+        </div>
+        <a class="button" href="https://depart-coach.site/" target="_blank" rel="noopener noreferrer">公開サイトを見る ↗</a>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <span>Web制作ポートフォリオ</span>
+        <span>Project: Départ</span>
+      </div>
+    </footer>
+  </body>
+</html>
